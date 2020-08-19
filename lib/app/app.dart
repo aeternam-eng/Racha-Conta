@@ -9,7 +9,8 @@ class AppWidget extends StatelessWidget {
       title: 'Meu Aplicativo',
       theme: ThemeData(
         brightness: Brightness.dark,
-        //primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.purpleAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),

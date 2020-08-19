@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class EqualPage extends StatefulWidget {
+class IndividualPage extends StatefulWidget {
   @override
-  _EqualPageState createState() => _EqualPageState();
+  _IndividualPageState createState() => _IndividualPageState();
 }
 
-class _EqualPageState extends State<EqualPage> {
+class _IndividualPageState extends State<IndividualPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

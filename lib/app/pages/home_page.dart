@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/app/pages/equal_page.dart';
-import 'package:hello_world/app/pages/proportional_page.dart';
+import 'package:hello_world/app/pages/overview_page.dart';
+import 'package:hello_world/app/pages/individual_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,8 +25,8 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(
           children: [
-            Icon(Icons.group),
-            Icon(Icons.person),
+            OverviewPage(),
+            IndividualPage(),
           ],
         ),
       ),
