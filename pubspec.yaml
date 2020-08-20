@@ -31,6 +31,7 @@ dependencies:
   bloc_pattern: ^0.0.1
   rxdart: ^0.24.1
   flutter_masked_text: ^0.8.0
+  numberpicker: ^1.2.1
 
 dev_dependencies:
   flutter_test:

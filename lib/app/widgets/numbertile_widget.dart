@@ -7,11 +7,15 @@ class NumberTile extends StatefulWidget {
     this.title = "default",
     this.maskController,
     this.editable = true,
+    this.onChanged,
+    this.textStyle = const TextStyle(fontFamily: "Roboto"),
   }) : super(key: key);
 
   final bool editable;
   final String title;
   final TextEditingController maskController;
+  final TextStyle textStyle;
+  final Function onChanged;
 
   @override
   _NumberTileState createState() => _NumberTileState();
@@ -21,6 +25,8 @@ class _NumberTileState extends State<NumberTile> {
   @override
   Widget build(BuildContext context) {
     return Flexible(
+      flex: 1,
+      fit: FlexFit.tight,
       child: Container(
         height: MediaQuery.of(context).size.height / 6,
         color: Colors.black26,
@@ -30,7 +36,6 @@ class _NumberTileState extends State<NumberTile> {
             Container(
               child: Text(
                 widget.title,
-                style: TextStyle(fontFamily: "Roboto"),
               ),
             ),
             Container(
@@ -38,7 +43,8 @@ class _NumberTileState extends State<NumberTile> {
                 enabled: widget.editable,
                 showCursor: true,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 32.0, fontFamily: "Roboto"),
+                onChanged: widget.onChanged,
+                style: widget.textStyle,
                 keyboardType: TextInputType.number,
                 controller: widget.maskController,
                 inputFormatters: [

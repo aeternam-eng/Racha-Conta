@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 class PercentageTile extends StatefulWidget {
-  final String title;
+  const PercentageTile({
+    this.title,
+    this.sliderValue = 0,
+    this.onChanged,
+  }) : super();
 
-  const PercentageTile(this.title) : super();
+  final String title;
+  final double sliderValue;
+  final Function onChanged;
 
   @override
   _PercentageTileState createState() => _PercentageTileState();
 }
 
 class _PercentageTileState extends State<PercentageTile> {
-  double _sliderValue = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,15 +33,13 @@ class _PercentageTileState extends State<PercentageTile> {
           Container(
             width: double.infinity,
             child: Slider(
-                value: _sliderValue,
-                min: 0,
-                max: 150,
-                label: '$_sliderValue',
-                onChanged: (double newValue) {
-                  setState(() {
-                    _sliderValue = newValue;
-                  });
-                }),
+              value: widget.sliderValue,
+              min: 0,
+              max: 50,
+              divisions: 50,
+              label: '${widget.sliderValue.toInt()}%',
+              onChanged: widget.onChanged,
+            ),
             color: Colors.black26,
             padding: const EdgeInsets.only(right: 70.0, left: 70.0),
             alignment: Alignment.topCenter,

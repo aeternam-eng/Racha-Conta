@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:rxdart/rxdart.dart';
 
-class OverviewBloc extends BlocBase {
+class IndividualBloc extends BlocBase {
   final _currentValueStreamController = BehaviorSubject<double>.seeded(0.0);
-  final _payingStreamController = BehaviorSubject<int>.seeded(1);
+  final _payingStreamController = BehaviorSubject<int>.seeded(0);
   final _individualValueStreamController = BehaviorSubject<double>.seeded(0.0);
   final _percentageStreamController = BehaviorSubject<double>.seeded(0.0);
   final _waiterValueStreamController = BehaviorSubject<double>.seeded(0.0);
