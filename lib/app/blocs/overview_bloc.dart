@@ -9,6 +9,7 @@ class OverviewBloc extends BlocBase {
   final _individualValueStreamController = BehaviorSubject<double>.seeded(0.0);
   final _percentageStreamController = BehaviorSubject<double>.seeded(0.0);
   final _waiterValueStreamController = BehaviorSubject<double>.seeded(0.0);
+  final _totalStreamController = BehaviorSubject<double>.seeded(0);
 
   Stream<double> get outCurrentValue => _currentValueStreamController.stream;
   Sink<double> get inCurrentValue => _currentValueStreamController.sink;
@@ -30,6 +31,10 @@ class OverviewBloc extends BlocBase {
   Sink<double> get inWaiter => _waiterValueStreamController.sink;
   double get waiter => _waiterValueStreamController.value;
 
+  Stream<double> get outTotal => _totalStreamController.stream;
+  Sink<double> get inTotal => _totalStreamController.sink;
+  double get total => _totalStreamController.value;
+
   void updateCurrentValue(double value) {
     inCurrentValue.add(value);
     calculate();
@@ -47,8 +52,10 @@ class OverviewBloc extends BlocBase {
 
   void calculate() {
     inWaiter.add(currentValue * (percentage / 100));
+
     var result = (currentValue / paying);
     inIndividual.add(result);
+    inTotal.add(result + (waiter / paying));
   }
 
   @override
@@ -58,5 +65,6 @@ class OverviewBloc extends BlocBase {
     _individualValueStreamController.close();
     _percentageStreamController.close();
     _waiterValueStreamController.close();
+    _totalStreamController.close();
   }
 }

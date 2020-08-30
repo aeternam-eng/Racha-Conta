@@ -32,7 +32,8 @@ class _OverviewPageState extends State<OverviewPage> {
     var currentValueTextController =
         MoneyMaskedTextController(initialValue: 0.00, leftSymbol: 'R\$');
     var waiterTextController =
-        MoneyMaskedTextController(initialValue: 0.00, leftSymbol: 'R\$');
+        //MoneyMaskedTextController(initialValue: 0.00, leftSymbol: 'R\$');
+        TextEditingController();
     var individualValueTextController =
         MoneyMaskedTextController(initialValue: 0.00, leftSymbol: 'R\$');
 
@@ -125,16 +126,26 @@ class _OverviewPageState extends State<OverviewPage> {
                     }),
                 StreamBuilder<double>(
                   stream: _bloc.outWaiter,
-                  builder: (context, value) {
-                    if (value.hasData) {
-                      waiterTextController.updateValue(value.data);
-                    }
-                    return NumberTile(
-                      title: "GORJETA",
-                      editable: false,
-                      textStyle: TextStyle(fontSize: 32),
-                      maskController: waiterTextController,
-                    );
+                  builder: (context, waiterValue) {
+                    return StreamBuilder<double>(
+                        stream: _bloc.outTotal,
+                        builder: (context, totalValue) {
+                          if (waiterValue.hasData && totalValue.hasData) {
+                            String waiter = waiterValue.data
+                                .toStringAsFixed(2)
+                                .replaceAll('.', ',');
+                            String total = totalValue.data
+                                .toStringAsFixed(2)
+                                .replaceAll('.', ',');
+                            waiterTextController.text = "R\$$waiter($total)";
+                          }
+                          return NumberTile(
+                            title: "GORJETA (TOTAL INDIV.)",
+                            editable: false,
+                            textStyle: TextStyle(fontSize: 20),
+                            maskController: waiterTextController,
+                          );
+                        });
                   },
                 ),
               ],
